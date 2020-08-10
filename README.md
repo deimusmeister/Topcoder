@@ -1,4 +1,4 @@
-## This is a brain training ground on algorithmic pronblems  
+## Gym for brain training
 Problems are coming from topcoder.com, leetcode.com, hackerrank.com
 
 ## Types of excersizes for brain muscles  
