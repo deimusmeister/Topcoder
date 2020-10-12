@@ -1,15 +1,3 @@
-// https://leetcode.com/problems/reverse-linked-list/
-// 
-// Reverse a singly linked list.
-// 
-// Example:
-// 
-// Input: 1->2->3->4->5->NULL
-// Output: 5->4->3->2->1->NULL
-// Follow up:
-// 
-// A linked list can be reversed either iteratively or recursively. Could you implement both?
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -23,26 +11,50 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        std::stack<ListNode*, std::vector<ListNode*>> st;
-        while(head != nullptr) {
-            st.push(head);
-            head = head->next;
+        if(head == nullptr) {
+            return nullptr;
         }
-        if(st.empty()) {
-            head = nullptr;
+        auto parent = head;
+        auto child = parent->next;
+        parent->next = nullptr;
+        if(child == nullptr) {
+            child = parent;
         } else {
-            head = st.top();            
+            while(child != nullptr) {
+                auto tmp = child->next;
+                child->next = parent;
+                parent = child;
+                if(tmp == nullptr) {
+                    break;
+                } else {
+                    child = tmp;                
+                }
+            }   
         }
-        while(!st.empty()) {
-            auto top = st.top();
-            st.pop();
-            if(st.empty()) {
-                top->next = nullptr;
-                break;
-            } else {
-                top->next = st.top();    
-            }
-        }
-        return head;
+        return child;
     }
+    
+    // ListNode* reverseList(ListNode* head) {
+    //     std::stack<ListNode*, std::vector<ListNode*>> st;
+    //     while(head != nullptr) {
+    //         st.push(head);
+    //         head = head->next;
+    //     }
+    //     if(st.empty()) {
+    //         head = nullptr;
+    //     } else {
+    //         head = st.top();            
+    //     }
+    //     while(!st.empty()) {
+    //         auto top = st.top();
+    //         st.pop();
+    //         if(st.empty()) {
+    //             top->next = nullptr;
+    //             break;
+    //         } else {
+    //             top->next = st.top();    
+    //         }
+    //     }
+    //     return head;
+    // }
 };
