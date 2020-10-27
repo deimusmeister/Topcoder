@@ -28,23 +28,43 @@
 class Solution {
 public:
     int findKthPositive(vector<int>& arr, int k) {
-        int n = arr.back() + k + 1;
-        std::vector<bool> mp(n, false);
-        for(auto i : arr) {
-            mp[i] = true;
+        if(arr[0] > k) {
+            return k;
         }
-        int result = -1;
+        int n = arr.size();
+        arr.push_back(arr[n - 1] + k + 1);
+        int missing = arr[0] - 1;
         int count = 0;
-        for(int j = 1; j < mp.size(); ++j) {
-            std::cout << j << " - " << mp[j] << " - " << count << std::endl;
-            auto i = mp[j];
-            if(!i) {
-                ++count;
-            }
-            if(k == count) {
-                return j;
+        for(int i = 1; i < n; ++i) {
+            ++count;
+            missing += (arr[i] - arr[i - 1] - 1);
+            if(missing >= k) {
+                missing -= (arr[i] - arr[i - 1] - 1); 
+                --count;
+                break;
             }
         }
-        return result;
+        missing = arr[count] + k - missing;   
+        return missing;
     }
+//     int findKthPositive(vector<int>& arr, int k) {
+//         int n = arr.back() + k + 1;
+//         std::vector<bool> mp(n, false);
+//         for(auto i : arr) {
+//             mp[i] = true;
+//         }
+//         int result = -1;
+//         int count = 0;
+//         for(int j = 1; j < mp.size(); ++j) {
+//             std::cout << j << " - " << mp[j] << " - " << count << std::endl;
+//             auto i = mp[j];
+//             if(!i) {
+//                 ++count;
+//             }
+//             if(k == count) {
+//                 return j;
+//             }
+//         }
+//         return result;
+//     }
 };
