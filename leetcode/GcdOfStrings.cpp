@@ -34,6 +34,9 @@ class Solution {
 public:
     string gcdOfStrings(string str1, string str2) {
         std::string result = "";
+        if(str1 + str2 != str2 + str1) {
+            return "";
+        }
         int a = std::max(str1.length(), str2.length());
         int b = std::min(str1.length(), str2.length());
         while(b != 0) {
@@ -41,47 +44,59 @@ public:
             b = a % b;
             a = t;
         }
-        //     function gcd(a, b)
-        // while b ≠ 0
-        //     t := b
-        //     b := a mod b
-        //     a := t
-        // return a
-        std::unordered_map<char, int> mp1;
-        std::unordered_map<char, int> mp2;
-        for(auto i : str1) {
-            mp1[i]++;
-        }
-        for(auto i : str2) {
-            mp2[i]++;
-        }
-        if(mp1.size() != mp2.size()) {
-            return "";
-        }
-        int min1 = std::numeric_limits<int>::max();
-        int ln1 = 0;
-        for(auto i : mp1) {
-            min1 = std::min(min1, i.second);
-        }
-        for(auto i : mp1) {
-            ln1 += i.second / min1;
-        }
-
-        int min2 = std::numeric_limits<int>::max();
-        int ln2 = 0;
-        for(auto i : mp2) {
-            min2 = std::min(min2, i.second);
-        }
-        for(auto i : mp2) {
-            ln2 += i.second / min2;
-        }
-        if(ln2 != ln1) {
-            return "";
-        }
-        if(str1.substr(0, a) != str2.substr(0, a)) {
-            return "";
-        }
-        result = str1.substr(0, a);   
-        return result;
+        str1.substr(0, a);   
+        return str1.substr(0, a);
     }
+//     string gcdOfStrings(string str1, string str2) {
+//         std::string result = "";
+//         int a = std::max(str1.length(), str2.length());
+//         int b = std::min(str1.length(), str2.length());
+//         while(b != 0) {
+//             auto t = b;
+//             b = a % b;
+//             a = t;
+//         }
+//         //     function gcd(a, b)
+//         // while b ≠ 0
+//         //     t := b
+//         //     b := a mod b
+//         //     a := t
+//         // return a
+//         std::unordered_map<char, int> mp1;
+//         std::unordered_map<char, int> mp2;
+//         for(auto i : str1) {
+//             mp1[i]++;
+//         }
+//         for(auto i : str2) {
+//             mp2[i]++;
+//         }
+//         if(mp1.size() != mp2.size()) {
+//             return "";
+//         }
+//         int min1 = std::numeric_limits<int>::max();
+//         int ln1 = 0;
+//         for(auto i : mp1) {
+//             min1 = std::min(min1, i.second);
+//         }
+//         for(auto i : mp1) {
+//             ln1 += i.second / min1;
+//         }
+
+//         int min2 = std::numeric_limits<int>::max();
+//         int ln2 = 0;
+//         for(auto i : mp2) {
+//             min2 = std::min(min2, i.second);
+//         }
+//         for(auto i : mp2) {
+//             ln2 += i.second / min2;
+//         }
+//         if(ln2 != ln1) {
+//             return "";
+//         }
+//         if(str1.substr(0, a) != str2.substr(0, a)) {
+//             return "";
+//         }
+//         result = str1.substr(0, a);   
+//         return result;
+//     }
 };
