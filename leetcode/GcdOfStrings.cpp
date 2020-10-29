@@ -30,7 +30,6 @@
 // 1 <= str2.length <= 1000
 // str1 and str2 consist of English uppercase letters.
 
-
 class Solution {
 public:
     string gcdOfStrings(string str1, string str2) {
@@ -67,7 +66,6 @@ public:
         for(auto i : mp1) {
             ln1 += i.second / min1;
         }
-        std::cout << "ln1: " << ln1 << std::endl;
 
         int min2 = std::numeric_limits<int>::max();
         int ln2 = 0;
@@ -77,7 +75,6 @@ public:
         for(auto i : mp2) {
             ln2 += i.second / min2;
         }
-        std::cout << "ln2: " << ln2 << std::endl;
         if(ln2 != ln1) {
             return "";
         }
