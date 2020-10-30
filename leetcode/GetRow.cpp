@@ -34,27 +34,49 @@
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
-        std::vector<int> row;
+        std::deque<int> row;
         int count = 0;
         row.push_back(1); 
         if(count == rowIndex) {
-            return row;
+            return {row.begin(), row.end()};
         }
         ++count;
         row.push_back(1);
         if(count == rowIndex) {
-            return row;
+            return {row.begin(), row.end()};
         }
         while(count != rowIndex) {
             ++count;
-            std::vector<int> newVec;
-            newVec.push_back(1);
-            for(int i = 1; i < row.size(); ++i) {
-                newVec.push_back(row[i - 1] + row[i]);
+            int n = row.size();
+            for(int i = 1; i < n; ++i) {
+                row[i -1] = row[i - 1] + row[i];
             }
-            newVec.push_back(1);
-            row = newVec;
+            row.push_front(1);
         }
-        return row;
+        return {row.begin(), row.end()};
     }
+//     vector<int> getRow(int rowIndex) {
+//         std::vector<int> row;
+//         int count = 0;
+//         row.push_back(1); 
+//         if(count == rowIndex) {
+//             return row;
+//         }
+//         ++count;
+//         row.push_back(1);
+//         if(count == rowIndex) {
+//             return row;
+//         }
+//         while(count != rowIndex) {
+//             ++count;
+//             std::vector<int> newVec;
+//             newVec.push_back(1);
+//             for(int i = 1; i < row.size(); ++i) {
+//                 newVec.push_back(row[i - 1] + row[i]);
+//             }
+//             newVec.push_back(1);
+//             row = newVec;
+//         }
+//         return row;
+//     }
 };
