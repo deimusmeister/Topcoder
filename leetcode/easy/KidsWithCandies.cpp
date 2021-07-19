@@ -35,11 +35,7 @@ public:
         }
         std::vector<bool> result;
         for(auto i : candies) {
-            if (i + extraCandies >= max) {
-                result.push_back(true);
-            } else {
-                result.push_back(false);
-            }
+            result.push_back(i + extraCandies >= max);
         }
         return result;
     }
