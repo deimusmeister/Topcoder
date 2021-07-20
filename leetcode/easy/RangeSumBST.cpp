@@ -35,14 +35,23 @@
  */
 class Solution {
 public:
-    int rangeSumBST(TreeNode* root, int L, int R) {
+    int rangeSumBST(TreeNode* root, int low, int high) {
         if(root == nullptr) {
             return 0;
         }
-        auto val = 0;
-        if(root->val >= L && root->val <= R) {
-            val = root->val;
+        int left = 0;
+        int cur = 0;
+        int right = 0;
+        
+        if(low <= root->val) {
+            left = rangeSumBST(root->left, low, high);
         }
-        return val + rangeSumBST(root->left, L, R) + rangeSumBST(root->right, L, R);
+        if(low <= root->val && root->val <= high) {
+            cur = root->val;
+        }
+        if(root->val <= high) {
+            right = rangeSumBST(root->right, low, high);
+        }
+        return left + cur + right;
     }
 };
