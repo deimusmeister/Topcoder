@@ -35,24 +35,19 @@ class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
         std::vector<int> result;
-        std::map<int, int> map;
-        for(auto i : nums) {
-            if(map.find(i) == map.end()) {
-                map[i] = 1;    
-            } else {
-                ++map[i];
-            }
-            
-        }
+        std::unordered_map<int, int> m;
+        std::vector<int> t(nums.begin(), nums.end());
+        std::sort(t.begin(), t.end());
         int count = 0;
-        for(auto& i: map) {
-            auto tmp = count;
-            count += i.second;
-            i.second = tmp;
-            std::cout << "key = " << i.first << " val = " << i.second << std::endl;
+        m[t[0]] = 0;
+        for(int i = 1; i < nums.size(); ++i) {
+            if(t[i] > t[i - 1]) {
+                count = i;
+            }
+            m[t[i]] = count;
         }
-        for(auto i: nums) {
-            result.push_back(map[i]);
+        for(int i = 0; i < nums.size(); ++i) {
+            result.push_back(m[nums[i]]);
         }
         return result;
     }
